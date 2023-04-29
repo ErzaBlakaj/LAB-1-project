@@ -122,4 +122,12 @@ Pershkrimi text,
 Data_Publikimit date
 );
 
+CREATE TABLE subscription (
+  id INT PRIMARY KEY IDENTITY(1,1),
+  duration VARCHAR(20) NOT NULL, -- can be "daily", "monthly", "six-monthly", or "yearly"
+  price DECIMAL(10,2) NOT NULL,
+  Start_data DATE NOT NULL,
+  End_date Date NOT NULL
+);
+
 
