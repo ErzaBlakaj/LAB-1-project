@@ -106,6 +106,21 @@ namespace lab1_project.Services
                 }
             }
         }
+
+        internal void DeleteFeedbackById(int feedbackId)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void UpdateFeedbackById(object id, object menyra_pageses_Id, object promokodi_Id, object sasia, object klientId)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal void UpdateFeedbackById(string emri_Perdoruesit, string komenti, int vleresimi, int id_Linjat)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 
