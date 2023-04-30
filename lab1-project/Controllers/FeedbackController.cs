@@ -49,7 +49,7 @@ namespace lab1_project.Controllers
                 return ex.Message;
             }
         }
-        [HttpGet("getAllShitjet")]
+        [HttpGet("getAllFeebacks")]
         public List<GetFeedbacks> GetAllFeedbacks()
         {
             try
