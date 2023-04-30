@@ -38,12 +38,12 @@ namespace lab1_project.Controllers
                 return ex.Message;
             }
         }
-        [HttpDelete("deleteNjoftimetById")]
-        public string DeleteNjoftimetById([FromQuery] int njoftimetkId)
+        [HttpDelete("deleteNjoftimById")]
+        public string DeleteNjoftimById([FromQuery] int njoftimetId)
         {
             try
             {
-                _njoftimetService.DeleteNjoftimetById(njoftimetId);
+                _njoftimetService.DeleteNjoftimet(njoftimetId);
 
                 return "Njoftimi u fshi  me sukses!";
             }
@@ -70,7 +70,7 @@ namespace lab1_project.Controllers
         {
             try
             {
-                _njoftimetService.UpdateNjoftimet(njoftimet.Titulli, njoftimet.Pershkrimi, njoftimet.Id_Linjat);
+                _njoftimetService.UpdateNjoftimet(njoftimet.Id,njoftimet.Titulli, njoftimet.Pershkrimi, njoftimet.Id_Linjat);
 
                 return "Feedback u perditesua me sukses!";
             }

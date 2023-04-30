@@ -54,13 +54,13 @@ namespace lab1_project.Services
             {
                 connection.Open();
 
-                var result = connection.Query<Models.GetNjoftimet>("NjoftimetGet", commandType: CommandType.StoredProcedure);
+                var result = connection.Query<Models.GetNjoftimet>("GetNjoftimet", commandType: CommandType.StoredProcedure);
 
                 return result.ToList();
             }
         }
 
-        public void DeleteNjoftimet(int id, object njoftimetId)
+        public void DeleteNjoftimet(int id)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -70,9 +70,9 @@ namespace lab1_project.Services
                     try
                     {
                         var parameters = new DynamicParameters();
-                        parameters.Add("@NjoftimetId", njoftimetId);
+                        parameters.Add("@Id", id);
 
-                        connection.Execute("DeleteNjoftimet", parameters, commandType: CommandType.StoredProcedure, transaction: transaction);
+                        connection.Execute("DeleteNjoftim", parameters, commandType: CommandType.StoredProcedure, transaction: transaction);
 
                         transaction.Commit();
                     
@@ -84,7 +84,7 @@ namespace lab1_project.Services
                 }
             }
         }
-        public void UpdateNjoftimet(string title, string description, int? lineId)
+        public void UpdateNjoftimet(int? id,string title, string description, int? lineId)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -94,13 +94,14 @@ namespace lab1_project.Services
                     try
                     {
                         var parameters = new Dapper.DynamicParameters();
+                        parameters.Add("@Id", id);
                         parameters.Add("@Titulli", title);
                         parameters.Add("@Pershkrimi", description);
                         parameters.Add("@Id_Linjat", lineId);
 
 
 
-                        connection.Execute("UpdateFeedback", parameters, commandType: CommandType.StoredProcedure, transaction: transaction);
+                        connection.Execute("UpdateNjoftim", parameters, commandType: CommandType.StoredProcedure, transaction: transaction);
 
                         transaction.Commit();
                     }
@@ -113,10 +114,6 @@ namespace lab1_project.Services
             }
         }
 
-        internal void DeleteNjoftimetById(object njoftimetId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
 

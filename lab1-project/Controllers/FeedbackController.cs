@@ -40,7 +40,7 @@ namespace lab1_project.Controllers
         {
             try
             {
-                _feedbackService.DeleteFeedbackById(feedbackId);
+                _feedbackService.DeleteFeedback(feedbackId);
 
                 return "Feedback u fshi  me sukses!";
             }
@@ -67,7 +67,7 @@ namespace lab1_project.Controllers
         {
             try
             {
-                _feedbackService.UpdateFeedbackById(feedback.Emri_Perdoruesit, feedback.Komenti, feedback.Vleresimi, feedback.Id_Linjat);
+                _feedbackService.UpdateFeedback(feedback.Id, feedback.Komenti, feedback.Vleresimi,feedback.Emri_Perdoruesit,feedback.Id_Linjat);
 
                 return "Feedback u perditesua me sukses!";
             }

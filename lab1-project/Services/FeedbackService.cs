@@ -53,7 +53,7 @@ namespace lab1_project.Services
                     try
                     {
                         var parameters = new DynamicParameters();
-                        parameters.Add("@FeedbackId", feedbackId);
+                        parameters.Add("@Id", feedbackId);
 
                         connection.Execute("DeleteFeedback", parameters, commandType: CommandType.StoredProcedure, transaction: transaction);
 
@@ -74,13 +74,13 @@ namespace lab1_project.Services
             {
                 connection.Open();
 
-                var result = connection.Query<Models.GetFeedbacks>("FeedbackGet", commandType: CommandType.StoredProcedure);
+                var result = connection.Query<Models.GetFeedbacks>("GetFeedback", commandType: CommandType.StoredProcedure);
 
                 return result.ToList();
             }
         }
 
-        public void UpdateFeedback(int feedbackId, string comment, int rating)
+        public void UpdateFeedback(int? feedbackId, string comment, int rating,string username,int linjatId)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -90,9 +90,11 @@ namespace lab1_project.Services
                     try
                     {
                         var parameters = new DynamicParameters();
-                        parameters.Add("@FeedbackId", feedbackId);
+                        parameters.Add("@Id", feedbackId);
                         parameters.Add("@Komenti", comment);
                         parameters.Add("@Vleresimi", rating);
+                        parameters.Add("@Emri_Perdoruesit", username);
+                        parameters.Add("@Id_Linjat",linjatId);
 
                         connection.Execute("UpdateFeedback", parameters, commandType: CommandType.StoredProcedure, transaction: transaction);
 
@@ -107,20 +109,6 @@ namespace lab1_project.Services
             }
         }
 
-        internal void DeleteFeedbackById(int feedbackId)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal void UpdateFeedbackById(object id, object menyra_pageses_Id, object promokodi_Id, object sasia, object klientId)
-        {
-            throw new NotImplementedException();
-        }
-
-        internal void UpdateFeedbackById(string emri_Perdoruesit, string komenti, int vleresimi, int id_Linjat)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
 
