@@ -70,7 +70,7 @@ namespace lab1_project.Controllers
         {
             try
             {
-                _njoftimetService.InsertNjoftimet(njoftimet.Titulli, njoftimet.Pershkrimi, njoftimet.Id_Linjat);
+                _njoftimetService.UpdateNjoftimet(njoftimet.Titulli, njoftimet.Pershkrimi, njoftimet.Id_Linjat);
 
                 return "Feedback u perditesua me sukses!";
             }

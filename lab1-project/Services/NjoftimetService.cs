@@ -22,7 +22,7 @@ namespace lab1_project.Services
             }
         }
 
-        public void InsertNjoftimet(string title, string description, int lineId)
+        public void InsertNjoftimet(string title, string description, int? lineId)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -33,10 +33,10 @@ namespace lab1_project.Services
                     {
                         var parameters = new Dapper.DynamicParameters();
                         parameters.Add("@Titulli", title);
-                        parameters.Add(" @Pershkrimi", description);
-                        parameters.Add(" @Id_Linjat", lineId);
+                        parameters.Add("@Pershkrimi", description);
+                        parameters.Add("@Id_Linjat", lineId);
 
-                        connection.Execute("InsertFeedback", parameters, commandType: CommandType.StoredProcedure, transaction: transaction);
+                        connection.Execute("InsertNjoftim", parameters, commandType: CommandType.StoredProcedure, transaction: transaction);
 
                         transaction.Commit();
                     }
@@ -84,7 +84,7 @@ namespace lab1_project.Services
                 }
             }
         }
-        public void UpdateNjoftimet(string title, string description, int lineId)
+        public void UpdateNjoftimet(string title, string description, int? lineId)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -95,8 +95,8 @@ namespace lab1_project.Services
                     {
                         var parameters = new Dapper.DynamicParameters();
                         parameters.Add("@Titulli", title);
-                        parameters.Add(" @Pershkrimi", description);
-                        parameters.Add(" @Id_Linjat", lineId);
+                        parameters.Add("@Pershkrimi", description);
+                        parameters.Add("@Id_Linjat", lineId);
 
 
 
@@ -111,6 +111,11 @@ namespace lab1_project.Services
                     }
                 }
             }
+        }
+
+        internal void DeleteNjoftimetById(object njoftimetId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
