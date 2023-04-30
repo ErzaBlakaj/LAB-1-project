@@ -48,6 +48,18 @@ namespace lab1_project.Services
                 }
             }
         }
+        public List<Models.GetNjoftimet> GetNjoftimet()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                var result = connection.Query<Models.GetNjoftimet>("NjoftimetGet", commandType: CommandType.StoredProcedure);
+
+                return result.ToList();
+            }
+        }
+
         public void DeleteNjoftimet(int id, object njoftimetId)
         {
             using (var connection = new SqlConnection(_connectionString))
