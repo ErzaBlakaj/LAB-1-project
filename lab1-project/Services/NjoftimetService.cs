@@ -4,6 +4,7 @@ using System.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using lab1_project.Models;
 
 
 namespace lab1_project.Services
@@ -40,6 +41,30 @@ namespace lab1_project.Services
                         transaction.Commit();
                     }
                     catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
+            }
+        }
+        public void DeleteNjoftimet(int id, object njoftimetId)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        var parameters = new DynamicParameters();
+                        parameters.Add("@NjoftimetId", njoftimetId);
+
+                        connection.Execute("DeleteNjoftimet", parameters, commandType: CommandType.StoredProcedure, transaction: transaction);
+
+                        transaction.Commit();
+                    
+                    }catch (Exception ex)
                     {
                         transaction.Rollback();
                         throw;
