@@ -11,5 +11,6 @@ namespace lab1_project.Controllers
     [ApiController]
     public class NjoftimetController
     {
+        private NjoftimetService _NjoftimetService;
     }
 }
