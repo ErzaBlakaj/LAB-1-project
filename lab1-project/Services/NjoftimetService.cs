@@ -72,6 +72,34 @@ namespace lab1_project.Services
                 }
             }
         }
+        public void UpdateNjoftimet(string title, string description, int lineId)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        var parameters = new Dapper.DynamicParameters();
+                        parameters.Add("@Titulli", title);
+                        parameters.Add(" @Pershkrimi", description);
+                        parameters.Add(" @Id_Linjat", lineId);
+
+
+
+                        connection.Execute("UpdateFeedback", parameters, commandType: CommandType.StoredProcedure, transaction: transaction);
+
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
+            }
+        }
     }
 }
 
