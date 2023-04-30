@@ -65,6 +65,20 @@ namespace lab1_project.Controllers
                 throw ex;
             }
         }
+        [HttpPut("updateNjoftimetById")]
+        public string UpdateNjoftimetById([FromBody] Njoftimet njoftimet)
+        {
+            try
+            {
+                _njoftimetService.InsertNjoftimet(njoftimet.Titulli, njoftimet.Pershkrimi, njoftimet.Id_Linjat);
+
+                return "Feedback u perditesua me sukses!";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
 
     }
 }
