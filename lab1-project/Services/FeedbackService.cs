@@ -2,6 +2,8 @@
 using System.Data.SqlClient;
 using System.Data;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace lab1_project.Services
 {
@@ -14,7 +16,34 @@ namespace lab1_project.Services
         {
             _connectionString = connectionString;
         }
-        public void InsertFeedback(string emriPerdoruesit, string komenti, int vleresimi, int idLinjat, string connectionString)
+        public void InsertFeedback(string username, string comment, int rating, int lineId)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        var parameters = new Dapper.DynamicParameters();
+                        parameters.Add("@Emri_Perdoruesit", username);
+                        parameters.Add("@Komenti", comment);
+                        parameters.Add("@Vleresimi", rating);
+                        parameters.Add("@Id_Linjat", lineId);
+
+                        connection.Execute("InsertFeedback", parameters, commandType: CommandType.StoredProcedure, transaction: transaction);
+
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw;
+                    }
+                }
+            }
+        }
+        public void DeleteFeedback(int feedbackId)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -24,29 +53,60 @@ namespace lab1_project.Services
                     try
                     {
                         var parameters = new DynamicParameters();
-                        parameters.Add("@Emri_Perdoruesit", emriPerdoruesit, DbType.String, size: 255);
-                        parameters.Add("@Komenti", komenti, DbType.String, size: -1);
-                        parameters.Add("@Vleresimi", vleresimi, DbType.Int32);
-                        parameters.Add("@Id_Linjat", idLinjat, DbType.Int32);
+                        parameters.Add("@FeedbackId", feedbackId);
 
-                        connection.Execute(
-                            "InsertFeedback",
-                            parameters,
-                            transaction: transaction,
-                            commandType: CommandType.StoredProcedure
-                        );
+                        connection.Execute("DeleteFeedback", parameters, commandType: CommandType.StoredProcedure, transaction: transaction);
 
                         transaction.Commit();
                     }
                     catch (Exception ex)
                     {
                         transaction.Rollback();
-                        throw new Exception("Failed to insert feedback.", ex);
+                        throw;
+                    }
+                }
+            }
+        }
+
+        public List<GetFeedback> GetFeedback()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                var result = connection.Query<GetFeedback>("FeedbackGet", commandType: CommandType.StoredProcedure);
+
+                return result.ToList();
+            }
+        }
+
+        public void UpdateFeedback(int feedbackId, string comment, int rating)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    try
+                    {
+                        var parameters = new DynamicParameters();
+                        parameters.Add("@FeedbackId", feedbackId);
+                        parameters.Add("@Komenti", comment);
+                        parameters.Add("@Vleresimi", rating);
+
+                        connection.Execute("UpdateFeedback", parameters, commandType: CommandType.StoredProcedure, transaction: transaction);
+
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        throw;
                     }
                 }
             }
         }
 
 
-    }
-}
+
+
