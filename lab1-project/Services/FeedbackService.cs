@@ -68,13 +68,13 @@ namespace lab1_project.Services
             }
         }
 
-        public List<GetFeedback> GetFeedback()
+        public List<Models.GetFeedbacks> GetFeedbacks()
         {
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
 
-                var result = connection.Query<GetFeedback>("FeedbackGet", commandType: CommandType.StoredProcedure);
+                var result = connection.Query<Models.GetFeedbacks>("FeedbackGet", commandType: CommandType.StoredProcedure);
 
                 return result.ToList();
             }
@@ -106,6 +106,8 @@ namespace lab1_project.Services
                 }
             }
         }
+    }
+}
 
 
 
