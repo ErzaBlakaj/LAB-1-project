@@ -44,5 +44,18 @@ namespace lab1_project.Services
                 }
             }
         }
+        public List<Models.GetInfromacionet> GetInfromacionet()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+
+                var result = connection.Query<Models.GetInfromacionet>("GetInfromacionet", commandType: CommandType.StoredProcedure);
+
+                return result.ToList();
+            }
+        }
+
+
     }
 }
