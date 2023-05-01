@@ -31,7 +31,7 @@ namespace lab1_project.Controllers
         {
             try
             {
-                _autobusat_LinjatService.InsertAutobusat_Linjat(autobusat_linjat.Id, autobusat_linjat.AutobusiId, autobusat_linjat.LinjatId);
+                _autobusat_LinjatService.InsertAutobusat_Linjat(autobusat_linjat.AutobusiId, autobusat_linjat.LinjatId);
 
                 return "Autobsi_Linjat u krijua me sukses!";
             }

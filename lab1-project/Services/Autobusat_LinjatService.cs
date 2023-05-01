@@ -18,7 +18,7 @@ namespace lab1_project.Services
             _connectionString = connectionString;
         }
 
-        public void InsertAutobusat_Linjat(int? id, int? autobusiid, int? linjatid)
+        public void InsertAutobusat_Linjat(int? autobusiid, int? linjatid)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -28,7 +28,7 @@ namespace lab1_project.Services
                 {
                     try
                     {
-                        connection.Execute("Autobusat_Linjatinsert", new { Id = id, AutobusiId = autobusiid, LinjatId = linjatid }, commandType: CommandType.StoredProcedure, transaction: transaction);
+                        connection.Execute("InsertAutobusat_Linjat", new {AutobusiId = autobusiid, LinjatId = linjatid }, commandType: CommandType.StoredProcedure, transaction: transaction);
 
                         transaction.Commit(); //nese gjithcka eshte okej kjo behet commit edhe ruhen te dhenat ne db
                     }

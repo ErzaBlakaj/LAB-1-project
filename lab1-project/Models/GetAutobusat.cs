@@ -2,7 +2,7 @@
 
 namespace lab1_project.Models
 {
-    public class GetAutobusat
+    public class GetAutobusatById
     {
         public int? Id { get; set; }
         public string? Persjkrimi { get; set; }

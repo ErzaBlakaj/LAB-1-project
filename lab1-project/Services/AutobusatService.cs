@@ -53,7 +53,8 @@ namespace lab1_project.Services
                         var parameters = new DynamicParameters();
                         parameters.Add("@Id", id);
 
-                        connection.Execute("AutobusatDelete", parameters, transaction, commandType: CommandType.StoredProcedure);
+                        connection.Execute("DeleteAutobusatById", parameters, transaction, commandType: CommandType.StoredProcedure);
+                        // qetu duhesh me ja qit emrin e procedures
 
                         transaction.Commit();
                     }
@@ -66,19 +67,19 @@ namespace lab1_project.Services
             }
         }
 
-        public List<GetAutobusat> GetAutobusat()
+        public List<GetAutobusatById> GetAutobusatById(int @Id)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
 
-                var result = connection.Query<GetAutobusat>("AutobusatGet", commandType: CommandType.StoredProcedure);
+                var result = connection.Query<GetAutobusatById>("GetAutobusatById", commandType: CommandType.StoredProcedure);
 
                 return result.ToList();
             }
         }
 
-        public void UpdateAutobusatById(int? id, string? Pershkrimi, string? Targat, DateTime? Dataeregjistrimit, DateTime? Dataeskadimitteregjistrimit, string? Nrshasise)
+        public void UpdateAutobusat(int? id, string? Pershkrimi, string? Targat, DateTime? Dataeregjistrimit, DateTime? Dataeskadimitteregjistrimit, string? Nrshasise)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -88,7 +89,7 @@ namespace lab1_project.Services
                 {
                     try
                     {
-                        connection.Execute("AutobusatUpdate",
+                        connection.Execute("UpdateAutobusat",
                             new
                             {
                                 Id = id,

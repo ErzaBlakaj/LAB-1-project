@@ -608,7 +608,8 @@ BEGIN
     INSERT INTO Autobusat (Pershkrimi, Targat, DataERegjistrimit, DataESkadimitTeRegjistrimit, NrShasise)
     VALUES (@Pershkrimi, @Targat, @DataERegjistrimit, @DataESkadimitTeRegjistrimit, @NrShasise);
 END
-
+delete from Autobusat
+select * from Autobusat
 
 EXEC InsertAutobusat 'Autobusi 1', 'ABC123', '2023-04-24', '2024-04-24', '1234-56789-01234';
 

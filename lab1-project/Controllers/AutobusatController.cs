@@ -48,7 +48,7 @@ namespace lab1_project.Controllers
             {
                 _autobusatService.DeleteAutobusatById(autobusiId);
 
-                return "Autobusi u fshij me sukses!";
+                return "Autobusi u fshij me sukses!"; 
             }
             catch (Exception ex)
             {
@@ -58,12 +58,12 @@ namespace lab1_project.Controllers
 
 
         [HttpGet("getAllAutobusat")]
-        public List<GetAutobusat> GetAllAutobusat()
+        public List<GetAutobusatById> GetAllAutobusat(int Id)
         {
             try
             {
 
-                return _autobusatService.GetAutobusat();
+                return _autobusatService.GetAutobusatById(Id);
             }
             catch (Exception ex)
             {
@@ -72,11 +72,11 @@ namespace lab1_project.Controllers
         }
 
         [HttpPut("updateAutobusinById")]
-        public string UpdateAutobusinById([FromBody] Autobusat autobusat)
+        public string UpdateAutobusat([FromBody] Autobusat autobusat)
         {
             try
             {
-                _autobusatService.UpdateAutobusatById(autobusat.Id, autobusat.Pershkrimi, autobusat.Targat, autobusat.DataERegjistrimit, autobusat.DataESkadimitTeRegjistrimit, autobusat.NrShasise);
+                _autobusatService.UpdateAutobusat(autobusat.Id, autobusat.Pershkrimi, autobusat.Targat, autobusat.DataERegjistrimit, autobusat.DataESkadimitTeRegjistrimit, autobusat.NrShasise);
 
                 return "Autobusi u perditesua me sukses!";
             }
