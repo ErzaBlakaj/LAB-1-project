@@ -11,9 +11,7 @@ namespace lab1_project.Controllers
     [ApiController]
     public class NjoftimetController
     {
-        private NjoftimetService _NjoftimetService;
         private NjoftimetService _njoftimetService;
-        private readonly object njoftimetId;
 
         public NjoftimetController(IConfiguration configuration)
         {

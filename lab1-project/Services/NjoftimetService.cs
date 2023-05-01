@@ -17,9 +17,6 @@ namespace lab1_project.Services
         {
             _connectionString = connectionString;
 
-            {
-
-            }
         }
 
         public void InsertNjoftimet(string title, string description, int? lineId)
