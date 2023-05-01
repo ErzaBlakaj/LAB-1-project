@@ -17,7 +17,7 @@ namespace lab1_project.Services
             _connectionString = connectionString;
 
         }
-        public void InsertInfromacionet(string title, string description,string username, int? lineId)
+        public void InsertInfromacionet(string title, string description, int? lineId)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -27,7 +27,6 @@ namespace lab1_project.Services
                     try
                     {
                         var parameters = new Dapper.DynamicParameters();
-                        parameters.Add("@Emri_Perdoruesit", username);
                         parameters.Add("@Titulli", title);
                         parameters.Add("@Pershkrimi", description);
                         parameters.Add("@Id_Linjat", lineId);
@@ -80,7 +79,7 @@ namespace lab1_project.Services
                 }
             }
         }
-        public void UpdateInfromacionet(int? id, string title, string description, string username ,int? lineId)
+        public void UpdateInfromacionet(int? id, string title, string description, int? lineId)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -90,7 +89,6 @@ namespace lab1_project.Services
                     try
                     {
                         var parameters = new Dapper.DynamicParameters();
-                        parameters.Add(@"Emri_Perdoruesit", username);
                         parameters.Add("@Id", id);
                         parameters.Add("@Titulli", title);
                         parameters.Add("@Pershkrimi", description);
