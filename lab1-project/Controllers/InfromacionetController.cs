@@ -19,6 +19,22 @@ namespace lab1_project.Controllers
 
             _InfromacionetService = new InfromacionetService(connectionString);
         }
+        [HttpPost("InsertInfromacionet")]
+        public string InsertNjoftimetEndPoint([FromBody] Infromacionet infromacionet)
+        {
+
+            try
+            {
+                _InfromacionetService.InsertInfromacionet(infromacionet.Titulli, infromacionet.Pershkrimi);
+
+                return "Njoftimi u  krijua me sukses!";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
 
     }
+
 }
