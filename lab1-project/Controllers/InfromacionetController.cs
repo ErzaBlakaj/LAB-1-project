@@ -1,6 +1,24 @@
-﻿namespace lab1_project.Controllers
+﻿using lab1_project.Models;
+using lab1_project.Services;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using System;
+using System.Collections.Generic;
+
+namespace lab1_project.Controllers
 {
+    [Route("/api/[controller]")]
+    [ApiController]  
     public class InfromacionetController
     {
+        private InfromacionetService _InfromacionetService;
+
+        public InfromacionetController(IConfiguration configuration)
+        {
+            string connectionString = configuration.GetValue<string>("ConnectionString");
+
+            _InfromacionetService = new InfromacionetService(connectionString);
+        }
+
     }
 }
