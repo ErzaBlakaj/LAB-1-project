@@ -39,7 +39,7 @@ namespace lab1_project.Controllers
         {
             try
             {
-                _infromacionetService.DeleteInfromacionet(infromacionetId);
+                _InfromacionetService.DeleteInfromacionet(infromacionetId);
 
                 return "Informacioni u fshi  me sukses!";
             }
@@ -54,7 +54,7 @@ namespace lab1_project.Controllers
             try
             {
 
-                return _infromacionetService.GetInfromacionet();
+                return InfromacionetService.GetInfromacionet();
             }
             catch (Exception ex)
             {
