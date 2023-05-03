@@ -58,12 +58,12 @@ namespace lab1_project.Controllers
 
 
         [HttpGet("getAllAutobusat")]
-        public List<GetAutobusatById> GetAllAutobusat(int Id)
+        public List<GetAutobusat> GetAllAutobusat()
         {
             try
             {
 
-                return _autobusatService.GetAutobusatById(Id);
+                return _autobusatService.GetAutobusatById();
             }
             catch (Exception ex)
             {

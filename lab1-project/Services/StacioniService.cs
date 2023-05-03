@@ -19,7 +19,7 @@ namespace lab1_project.Services
             _connectionString = connectionString;
         }
 
-        public void InsertStacioni(String? Emri, String? Adresa, float? Latitude, float? Longitude, decimal? KodiPostal)
+        public void StacioniInsert(String? Emri, String? Adresa, float? Latitude, float? Longitude, decimal? KodiPostal)
         {
             using (var connection = new SqlConnection(_connectionString))
             {

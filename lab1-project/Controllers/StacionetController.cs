@@ -31,7 +31,7 @@ namespace lab1_project.Controllers
         {
             try
             {
-                _stacioniService.InsertStacioni(stacioni.Emri, stacioni.Adresa, stacioni.Latitude, stacioni.Longitude, stacioni.Kodi_Postal);
+                _stacioniService.StacioniInsert(stacioni.Emri, stacioni.Adresa, stacioni.Latitude, stacioni.Longitude, stacioni.Kodi_Postal);
 
                 return "Stacioni u shtua me sukses!";
             }

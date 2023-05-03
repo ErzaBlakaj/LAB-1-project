@@ -67,13 +67,13 @@ namespace lab1_project.Services
             }
         }
 
-        public List<GetAutobusatById> GetAutobusatById(int @Id)
+        public List<GetAutobusat> GetAutobusatById()
         {
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
 
-                var result = connection.Query<GetAutobusatById>("GetAutobusatById", commandType: CommandType.StoredProcedure);
+                var result = connection.Query<GetAutobusat>("GetAutobusatById", commandType: CommandType.StoredProcedure);
 
                 return result.ToList();
             }
@@ -112,5 +112,9 @@ namespace lab1_project.Services
                 }
             }
         }
+    }
+
+    public class GetAutobusat
+    {
     }
 }
