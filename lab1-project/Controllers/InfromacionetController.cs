@@ -49,12 +49,11 @@ namespace lab1_project.Controllers
             }
         }
         [HttpGet("getAllInfromacionet")]
-        public List<GetNjoftimet> GetAllInfromacionet()
+        public List<GetInfromacionet> GetAllInfromacionet()
         {
             try
             {
-
-                return InfromacionetService.GetInfromacionet();
+                return _InfromacionetService.GetInfromacionet();
             }
             catch (Exception ex)
             {
