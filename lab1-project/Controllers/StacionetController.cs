@@ -26,12 +26,12 @@ namespace lab1_project.Controllers
         //DELETE - per fshijre 
         //PUT - update 
 
-        [HttpPost("StacioniInsert")]
+        [HttpPost("StacioniInsertt")]
         public string InsertStcionetEndPoint([FromBody] Stacioni stacioni)
         {
             try
             {
-                _stacioniService.StacioniInsert(stacioni.Emri, stacioni.Adresa, stacioni.Latitude, stacioni.Longitude, stacioni.Kodi_Postal);
+                _stacioniService.InsertStacioni(stacioni.Emri, stacioni.Adresa, stacioni.Latitude, stacioni.Longitude, stacioni.Kodi_Postal);
 
                 return "Stacioni u shtua me sukses!";
             }
@@ -74,12 +74,12 @@ namespace lab1_project.Controllers
             }
         }
 
-        [HttpPut("updateStacioninById")]
+        [HttpPut("StacioniUpdate")]
         public string UpdateStacioninById([FromBody] Stacioni stacioni)
         {
             try
             {
-                _stacioniService.UpdateStacioninById(stacioni.Id, stacioni.Emri, stacioni.Adresa, stacioni.Latitude, stacioni.Longitude, stacioni.Kodi_Postal);
+                _stacioniService.StacioniUpdate(stacioni.Id, stacioni.Emri, stacioni.Adresa, stacioni.Latitude, stacioni.Longitude, stacioni.Kodi_Postal);
 
                 return "Stacioni u perditesua me sukses!";
             }

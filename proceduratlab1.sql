@@ -303,7 +303,7 @@ AS
 BEGIN
     INSERT INTO Stacioni (Emri, Adresa, Latitude, Longitude, Kodi_Postal)
     VALUES (@Emri, @Adresa, @Latitude, @Longitude, @Kodi_Postal);
-END;
+END
 EXEC StacioniInsert @Emri, @Adresa, @Latitude, @Longitude, @Kodi_Postal;
 
 CREATE PROCEDURE StacioniGetAll

@@ -19,7 +19,7 @@ namespace lab1_project.Services
             _connectionString = connectionString;
         }
 
-        public void StacioniInsert(String? Emri, String? Adresa, float? Latitude, float? Longitude, decimal? KodiPostal)
+        public void InsertStacioni(String? Emri, String? Adresa, float? Latitude, float? Longitude, decimal? KodiPostal)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -29,7 +29,7 @@ namespace lab1_project.Services
                 {
                     try
                     {
-                        connection.Execute("StacioniInsert", new { Emri = Emri, Adresa = Adresa, Latitude = Latitude, Longitude = Longitude, Kodi_Postal = KodiPostal }, commandType: CommandType.StoredProcedure, transaction: transaction);
+                        connection.Execute("StacioniInsertt", new {Emri = Emri, Adresa = Adresa, Latitude = Latitude, Longitude = Longitude, Kodi_Postal = KodiPostal }, commandType: CommandType.StoredProcedure, transaction: transaction);
 
                         transaction.Commit(); //nese gjithcka eshte okej kjo behet commit edhe ruhen te dhenat ne db
                     }
@@ -79,7 +79,7 @@ namespace lab1_project.Services
             }
         }
 
-        public void UpdateStacioninById(int? Id, String? Emri, String? Adresa, float? Latitude, float? Longitude, decimal? KodiPostal)
+        public void StacioniUpdate(int? Id, String? Emri, String? Adresa, float? Latitude, float? Longitude, decimal? KodiPostal)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
