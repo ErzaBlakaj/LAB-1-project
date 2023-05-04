@@ -18,7 +18,7 @@ namespace lab1_project.Services
 
         }
     }
-    public void InsertSubscription(string duration,int? price )
+    public void InsertSubscription(string duration,int price )
     {
         using (var connection = new SqlConnection(_connectionString))
         {
@@ -79,7 +79,7 @@ namespace lab1_project.Services
             }
         }
     }
-    public void UpdateSubscription(string duration, int? price)
+    public void UpdateSubscription(string duration, int price)
     {
         using (var connection = new SqlConnection(_connectionString))
         {
