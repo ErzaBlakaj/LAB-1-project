@@ -17,7 +17,7 @@ namespace lab1_project.Services
             _connectionString = connectionString;
 
         }
-        public void InsertInfromacionet(string title, string description, int? lineId)
+        public void InsertInfromacionet(string title, string description)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -29,7 +29,7 @@ namespace lab1_project.Services
                         var parameters = new Dapper.DynamicParameters();
                         parameters.Add("@Titulli", title);
                         parameters.Add("@Pershkrimi", description);
-                        parameters.Add("@Id_Linjat", lineId);
+                        
 
                         connection.Execute("InsertInfromacionet", parameters, commandType: CommandType.StoredProcedure, transaction: transaction);
 
@@ -92,7 +92,7 @@ namespace lab1_project.Services
                         parameters.Add("@Id", id);
                         parameters.Add("@Titulli", title);
                         parameters.Add("@Pershkrimi", description);
-                        parameters.Add("@Id_Linjat", lineId);
+                        
 
 
 
