@@ -17,7 +17,7 @@ namespace lab1_project.Services
             _connectionString = connectionString;
 
         }
-        public void InsertSubscription(string duration, int price)
+        public void InsertSubscription(string duration, int? price, DateTime startDate, DateTime endDate)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -29,6 +29,8 @@ namespace lab1_project.Services
                         var parameters = new Dapper.DynamicParameters();
                         parameters.Add("@duration", duration);
                         parameters.Add("@price", price);
+                        parameters.Add("@Start_date", startDate);
+                        parameters.Add("@End_date", endDate);
 
                         connection.Execute("InsertSubscription", parameters, commandType: CommandType.StoredProcedure, transaction: transaction);
 
@@ -42,17 +44,17 @@ namespace lab1_project.Services
                 }
             }
         }
-        //public List<Models.GetSubscription> GetSubscription()
-        //{
-        //    using (var connection = new SqlConnection())
-        //    {
-        //        connection.Open();
+        public List<Models.GetSubscription> GetSubscription()
+        {
+            using (var connection = new SqlConnection())
+            {
+                connection.Open();
 
-        //        var result = connection.Query<Models.GetSubscription>("GetSubscription", commandType: CommandType.StoredProcedure);
+                var result = connection.Query<Models.GetSubscription>("GetSubscription", commandType: CommandType.StoredProcedure);
 
-        //        return result.ToList();
-        //    }
-        //}
+                return result.ToList();
+            }
+        }
         public void DeleteSubscription(int id)
         {
             using (var connection = new SqlConnection(_connectionString))
