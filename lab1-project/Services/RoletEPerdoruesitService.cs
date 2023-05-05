@@ -18,7 +18,7 @@ namespace lab1_project.Services
 			_connectionString = connectionString;
 		}
 
-		public void InsertRoletEPerdorueseve(int? Id, string? EmriIRolit)
+		public void InsertRoletEPerdorueseve(string? EmriIRolit)
 		{
 			using (var connection = new SqlConnection(_connectionString))
 			{
@@ -28,7 +28,7 @@ namespace lab1_project.Services
 				{
 					try
 					{
-						connection.Execute("RoletEPerdorueseveInsert", new { Id = Id, Emri_i_rolit = EmriIRolit }, commandType: CommandType.StoredProcedure, transaction: transaction);
+						connection.Execute("InsertRolet", new {Emri_i_rolit = EmriIRolit }, commandType: CommandType.StoredProcedure, transaction: transaction);
 
 						transaction.Commit(); //nese gjithcka eshte okej kjo behet commit edhe ruhen te dhenat ne db
 					}
@@ -53,7 +53,7 @@ namespace lab1_project.Services
 						var parameters = new DynamicParameters();
 						parameters.Add("@Id", id);
 
-						connection.Execute("RoletEPerdorueseveDelete", parameters, transaction, commandType: CommandType.StoredProcedure);
+						connection.Execute("DeleteRolet", parameters, transaction, commandType: CommandType.StoredProcedure);
 
 						transaction.Commit();
 					}
@@ -72,7 +72,7 @@ namespace lab1_project.Services
 			{
 				connection.Open();
 
-				var result = connection.Query<GetRoletEPerdorueseve>("RoletEPerdorueseveGet", commandType: CommandType.StoredProcedure);
+				var result = connection.Query<GetRoletEPerdorueseve>("GetRolet", commandType: CommandType.StoredProcedure);
 
 				return result.ToList();
 			}
@@ -88,7 +88,7 @@ namespace lab1_project.Services
 				{
 					try
 					{
-						connection.Execute("RoletEPerdorueseveUpdate",
+						connection.Execute("UpdateRolet",
 							new
 							{
 								Id = Id,

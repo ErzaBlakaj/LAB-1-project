@@ -31,7 +31,7 @@ namespace lab1_project.Controllers
 		{
 			try
 			{
-				_MenyratEPagesesService.InsertMenyratEPageses(MenyratEPageses.Id, MenyratEPageses.Pershkrimi);
+				_MenyratEPagesesService.InsertMenyratEPageses(MenyratEPageses.Pershkrimi);
 
 				return "Menyrat E Pageses u krijuan me sukses!";
 			}

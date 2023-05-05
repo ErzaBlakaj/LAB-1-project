@@ -18,7 +18,7 @@ namespace lab1_project.Services
 			_connectionString = connectionString;
 		}
 
-		public void InsertMenyratEPageses(int? Id, string? Pershkrimi)
+		public void InsertMenyratEPageses(string? Pershkrimi)
 		{
 			using (var connection = new SqlConnection(_connectionString))
 			{
@@ -28,7 +28,7 @@ namespace lab1_project.Services
 				{
 					try
 					{
-						connection.Execute("MenyratEPagesesInsert", new { Id = Id, Pershkrimi = Pershkrimi }, commandType: CommandType.StoredProcedure, transaction: transaction);
+						connection.Execute("InsertMultipleMenyratEPageses", new {Pershkrimi = Pershkrimi }, commandType: CommandType.StoredProcedure, transaction: transaction);
 
 						transaction.Commit(); //nese gjithcka eshte okej kjo behet commit edhe ruhen te dhenat ne db
 					}
@@ -53,7 +53,7 @@ namespace lab1_project.Services
 						var parameters = new DynamicParameters();
 						parameters.Add("@Id", id);
 
-						connection.Execute("MenyratEPagesesDelete", parameters, transaction, commandType: CommandType.StoredProcedure);
+						connection.Execute("DeleteMenyratEPagesesById", parameters, transaction, commandType: CommandType.StoredProcedure);
 
 						transaction.Commit();
 					}
@@ -72,7 +72,7 @@ namespace lab1_project.Services
 			{
 				connection.Open();
 
-				var result = connection.Query<GetMenyratEPageses>(" MenyratEPagesesGet", commandType: CommandType.StoredProcedure);
+				var result = connection.Query<GetMenyratEPageses>("GetMenyratEPagesesId", commandType: CommandType.StoredProcedure);
 
 				return result.ToList();
 			}
@@ -88,7 +88,7 @@ namespace lab1_project.Services
 				{
 					try
 					{
-						connection.Execute("MenyratEPageses",
+						connection.Execute("UpdateMenyratEPageses",
 							new
 							{
 								Id = Id,

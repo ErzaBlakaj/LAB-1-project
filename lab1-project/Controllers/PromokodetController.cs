@@ -31,7 +31,7 @@ namespace lab1_project.Controllers
 		{
 			try
 			{
-				_PromokodetService.InsertPromokodet(Promokodet.Id, Promokodet.Kodi_promocional, Promokodet.Zbritja, Promokodet.Data_skadimit, Promokodet.DataERegjistrimit);
+				_PromokodetService.InsertPromokodet(Promokodet.Kodi_promocional, Promokodet.Zbritja, Promokodet.Data_skadimit, Promokodet.DataERegjistrimit);
 
 				return "Promokodet u krijuan me sukses!";
 			}

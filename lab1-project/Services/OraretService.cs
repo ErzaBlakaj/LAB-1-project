@@ -18,7 +18,7 @@ namespace lab1_project.Services
 			_connectionString = connectionString;
 		}
 
-		public void InsertOraret(int? Id, string? EmriIlinjes, int? NumriIOrarit, TimeSpan? OraENisjes, TimeSpan? OraEMberritjes, string? StacioniINisjes, string? StacioniIMberritjes, int? IdLinjat)
+		public void InsertOraret(string? EmriIlinjes, int? NumriIOrarit, TimeSpan? OraENisjes, TimeSpan? OraEMberritjes, string? StacioniINisjes, string? StacioniIMberritjes, int? IdLinjat)
 		{
 			using (var connection = new SqlConnection(_connectionString))
 			{
@@ -28,7 +28,7 @@ namespace lab1_project.Services
 				{
 					try
 					{
-						connection.Execute("OraretInsert", new { Id = Id, Emri_i_linjes = EmriIlinjes, Numri_i_orarit = NumriIOrarit, Ora_e_nisjes = OraENisjes, Ora_e_mberritjes = OraEMberritjes, Stacioni_i_nisjes = StacioniINisjes, Stacioni_i_mberritjes = StacioniIMberritjes, Id_linjat = IdLinjat }, commandType: CommandType.StoredProcedure, transaction: transaction);
+						connection.Execute("InsertOraret", new {Emri_i_linjes = EmriIlinjes, Numri_i_orarit = NumriIOrarit, Ora_e_nisjes = OraENisjes, Ora_e_mberritjes = OraEMberritjes, Stacioni_i_nisjes = StacioniINisjes, Stacioni_i_mberritjes = StacioniIMberritjes, Id_linjat = IdLinjat }, commandType: CommandType.StoredProcedure, transaction: transaction);
 
 						transaction.Commit(); //nese gjithcka eshte okej kjo behet commit edhe ruhen te dhenat ne db
 					}
@@ -52,7 +52,7 @@ namespace lab1_project.Services
 						var parameters = new DynamicParameters();
 						parameters.Add("@Id", Id);
 
-						connection.Execute("OraretDelete", parameters, transaction, commandType: CommandType.StoredProcedure);
+						connection.Execute("DeleteOraret", parameters, transaction, commandType: CommandType.StoredProcedure);
 
 						transaction.Commit();
 					}
@@ -71,7 +71,7 @@ namespace lab1_project.Services
 			{
 				connection.Open();
 
-				var result = connection.Query<GetOraret>("OraretGet", commandType: CommandType.StoredProcedure);
+				var result = connection.Query<GetOraret>("GetOraret", commandType: CommandType.StoredProcedure);
 
 				return result.ToList();
 			}
@@ -87,7 +87,7 @@ namespace lab1_project.Services
 				{
 					try
 					{
-						connection.Execute("OraretUpdate",
+						connection.Execute("UpdateOraret",
 							new
 							{
 								Id = Id,
@@ -115,18 +115,7 @@ namespace lab1_project.Services
 				}
 			}
 		}
-
-		internal void InsertOraret(string emri_i_linjes, int? numri_i_orarit, TimeSpan? ora_e_nisjes, TimeSpan? ora_e_mberritjes, string stacioni_i_nisjes, string stacioni_i_mberritjes, int? id_Linjat)
-		{
-			throw new NotImplementedException();
-		}
-
-		internal void UpdateOraretById(string emri_i_linjes, int? numri_i_orarit, TimeSpan? ora_e_nisjes, TimeSpan? ora_e_mberritjes, string stacioni_i_nisjes, string stacioni_i_mberritjes, int? id_Linjat)
-		{
-			throw new NotImplementedException();
-		}
-	}
-}
+	}}
 
 
 

@@ -21,7 +21,7 @@ namespace lab1_project.Services
 			_connectionString = connectionString;
 		}
 
-		public void InsertPerdoruesi(int? Id, string? Emri, string? Mbiemri, string? Email, string? Fjalekalimi, int? IdRole)
+		public void InsertPerdoruesi(string? Emri, string? Mbiemri, string? Email, string? Fjalekalimi, int? IdRole)
 		{
 			using (var connection = new SqlConnection(_connectionString))
 			{
@@ -31,7 +31,7 @@ namespace lab1_project.Services
 				{
 					try
 					{
-						connection.Execute("PerdoruesiInsert", new { Id = Id, Emri = Emri, Mbiemri = Mbiemri, Email = Email, Fjalekalimi = Fjalekalimi, Id_role = IdRole }, commandType: CommandType.StoredProcedure, transaction: transaction);
+						connection.Execute("PerdoruesiInsert", new {Emri = Emri, Mbiemri = Mbiemri, Email = Email, Fjalekalimi = Fjalekalimi, Id_role = IdRole }, commandType: CommandType.StoredProcedure, transaction: transaction);
 
 						transaction.Commit(); //nese gjithcka eshte okej kjo behet commit edhe ruhen te dhenat ne db
 					}

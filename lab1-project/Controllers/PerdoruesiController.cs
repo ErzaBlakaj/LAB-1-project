@@ -31,7 +31,7 @@ namespace lab1_project.Controllers
 		{
 			try
 			{
-				_perdoruesiService.InsertPerdoruesi(Perdoruesi.Id, Perdoruesi.Emri, Perdoruesi.Mbiemri, Perdoruesi.Email, Perdoruesi.Fjalekalimi, Perdoruesi.Id_role);
+				_perdoruesiService.InsertPerdoruesi(Perdoruesi.Emri, Perdoruesi.Mbiemri, Perdoruesi.Email, Perdoruesi.Fjalekalimi, Perdoruesi.Id_role);
 
 				return "Perdoruesi u krijua me sukses!";
 			}

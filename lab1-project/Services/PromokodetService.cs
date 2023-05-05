@@ -18,7 +18,7 @@ namespace lab1_project.Services
 			_connectionString = connectionString;
 		}
 
-		public void InsertPromokodet(int? Id, string? KodiPromocional, float? Zbritja, DateTime? Data_skadimit, DateTime? DataERegjistrimit)
+		public void InsertPromokodet(string? KodiPromocional, float? Zbritja, DateTime? Data_skadimit, DateTime? DataERegjistrimit)
 		{
 			using (var connection = new SqlConnection(_connectionString))
 			{
@@ -28,7 +28,7 @@ namespace lab1_project.Services
 				{
 					try
 					{
-						connection.Execute("PromokodetInsert", new { Id = Id, Kodi_promocional = KodiPromocional, Zbrita = Zbritja, Data_skadimit = Data_skadimit, DataERegjistrimit = DataERegjistrimit }, commandType: CommandType.StoredProcedure, transaction: transaction);
+						connection.Execute("InsertPromokodet", new {Kodi_promocional = KodiPromocional, Zbrita = Zbritja, Data_skadimit = Data_skadimit, DataERegjistrimit = DataERegjistrimit }, commandType: CommandType.StoredProcedure, transaction: transaction);
 
 						transaction.Commit(); //nese gjithcka eshte okej kjo behet commit edhe ruhen te dhenat ne db
 					}
@@ -53,7 +53,7 @@ namespace lab1_project.Services
 						var parameters = new DynamicParameters();
 						parameters.Add("@Id", id);
 
-						connection.Execute("PromokodetDelete", parameters, transaction, commandType: CommandType.StoredProcedure);
+						connection.Execute("DeletePromokodet", parameters, transaction, commandType: CommandType.StoredProcedure);
 
 						transaction.Commit();
 					}
@@ -72,7 +72,7 @@ namespace lab1_project.Services
 			{
 				connection.Open();
 
-				var result = connection.Query<GetPromokodet>("Promokodet", commandType: CommandType.StoredProcedure);
+				var result = connection.Query<GetPromokodet>("GetPromokodet", commandType: CommandType.StoredProcedure);
 
 				return result.ToList();
 			}
@@ -88,7 +88,7 @@ namespace lab1_project.Services
 				{
 					try
 					{
-						connection.Execute("Promokodet",
+						connection.Execute("UpdatePromokodet",
 							new
 							{
 								Id = Id,

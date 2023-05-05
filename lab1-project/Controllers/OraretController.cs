@@ -79,7 +79,7 @@ namespace lab1_project.Controllers
 		{
 			try
 			{
-				_oraretService.UpdateOraretById(oraret.Emri_i_linjes, oraret.Numri_i_orarit, oraret.Ora_e_nisjes, oraret.Ora_e_mberritjes, oraret.stacioni_i_nisjes, oraret.stacioni_i_mberritjes, oraret.Id_Linjat);
+				_oraretService.UpdateOraretById(oraret.Id, oraret.Emri_i_linjes, oraret.Numri_i_orarit, oraret.Ora_e_nisjes, oraret.Ora_e_mberritjes, oraret.stacioni_i_nisjes, oraret.stacioni_i_mberritjes, oraret.Id_Linjat);
 
 
 				return "Orari u perditesua me sukses!";

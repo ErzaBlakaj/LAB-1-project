@@ -31,7 +31,7 @@ namespace lab1_project.Controllers
 		{
 			try
 			{
-				_roletEPerdorueseveService.InsertRoletEPerdorueseve(RoletEPerdorueseve.Id, RoletEPerdorueseve.Emri_i_rolit);
+				_roletEPerdorueseveService.InsertRoletEPerdorueseve(RoletEPerdorueseve.Emri_i_rolit);
 
 				return "Rolet E Perdorueseve u krijuan me sukses!";
 			}
